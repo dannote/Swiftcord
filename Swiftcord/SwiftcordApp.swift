@@ -9,6 +9,7 @@ import DiscordKit
 import DiscordKitCore
 import SwiftUI
 import OSLog
+import UserNotifications
 
 // There's probably a better place to put global constants
 let appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
@@ -29,6 +30,11 @@ fileprivate extension Scene {
 @main
 struct SwiftcordApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+	init() {
+		UNUserNotificationCenter.current()
+			.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+	}
 
 	internal static let tokenKeychainKey = "authTokens"
 	internal static let legacyTokenKeychainKey = "authToken"

@@ -16,21 +16,68 @@ struct StickerPackView: View {
 	@Binding var packPresenting: Bool
 	@State private var stickerHovered: Int?
 	@State private var listHovered: Bool = false
-	var body: some View {
-		VStack {
+	private var bannerSection: some View {
+		Group {
 			if pack.banner_asset_id != nil {
 				VStack {
 					CachedAsyncImage(url: pack.banner_asset_id?.stickerPackBannerURL(with: .webp, size: 1024)) { image in
 						image.resizable().scaledToFill()
-					} placeholder: { ProgressView().progressViewStyle(.circular)}
+					} placeholder: { ProgressView().progressViewStyle(.circular) }
 				}.frame(height: 100)
 			}
+		}
+	}
+
+	private func stickerCell(_ index: Int) -> some View {
+		StickerItemView(sticker: pack.stickers[index], size: 95, play: .onHover)
+			.onHover { hovering in stickerHovered = hovering ? index : nil }
+			.scaleEffect(stickerHovered == index ? 1.1 : 1.0)
+			.opacity(stickerHovered == index ? 1 : 0.5)
+	}
+
+	private var stickerGrid: some View {
+		let rowCount = Int(ceil(Double(pack.stickers.count) / 3.0))
+		return List {
+			ForEach(0..<rowCount, id: \.self) { row in
+				let colCount = min(3, pack.stickers.count - row * 3)
+				HStack {
+					ForEach(0..<colCount, id: \.self) { column in
+						stickerCell(row * 3 + column)
+					}
+				}.frame(maxWidth: .infinity)
+			}
+		}
+		.frame(height: 320)
+		.onHover { listHovered = $0 }
+	}
+
+	private var footerSection: some View {
+		Group {
+			if listHovered {
+				Text(stickerHovered == nil ? "" : pack.stickers[stickerHovered!].name)
+					.frame(height: 30)
+					.font(.title3)
+					.transition(.opacity)
+			} else {
+				HStack {
+					Image("NitroSubscriber")
+					Text("You need a Nitro subscription to send stickers from this pack.")
+						.fixedSize(horizontal: false, vertical: true)
+						.frame(height: 30)
+				}
+				.transition(.opacity)
+			}
+		}
+	}
+
+	var body: some View {
+		VStack {
+			bannerSection
 			VStack {
 				HStack(spacing: 15) {
-					// Back button
 					Button {
 						packPresenting = false
-					} label: {Image(systemName: "arrow.left")}
+					} label: { Image(systemName: "arrow.left") }
 						.controlSize(.large)
 					Text(pack.name).font(.title).fontWeight(.bold)
 					Spacer()
@@ -42,39 +89,10 @@ struct StickerPackView: View {
 				Text(pack.description)
 					.fixedSize(horizontal: false, vertical: true)
 					.frame(maxWidth: .infinity, alignment: .leading)
-				List {
-					ForEach(0..<Int(ceil(Double(pack.stickers.count)/3.0)), id: \.self) { row in
-						HStack {
-							ForEach(0..<min(3, Int(pack.stickers.count - row * 3)), id: \.self) { column in
-								let index: Int = row*3+column
-								StickerItemView(sticker: pack.stickers[index], size: 95, play: .onHover)
-									.onHover {
-										stickerHovered = $0 ? index : nil
-									}
-									.scaleEffect((stickerHovered == index) ? 1.1 : 1.0)
-									.opacity((stickerHovered == index) ? 1 : 0.5)
-							}
-						}.frame(maxWidth: .infinity)
-					}
-				}
-				.frame(height: 320)
-				.onHover {listHovered = $0}
-				if listHovered {
-					Text(stickerHovered == nil ? "" : pack.stickers[stickerHovered!].name)
-						.frame(height: 30)
-						.font(.title3)
-						.transition(.opacity)
-				} else {
-					HStack {
-						Image("NitroSubscriber")
-						Text("You need a Nitro subscription to send stickers from this pack.")
-							.fixedSize(horizontal: false, vertical: true)
-							.frame(height: 30)
-					}
-					.transition(.opacity)
-				}
-
-			}.padding(14)
+				stickerGrid
+				footerSection
+			}
+			.padding(14)
 			.animation(Animation.easeOut(duration: 0.1), value: stickerHovered)
 			.animation(Animation.linear(duration: 0.1), value: listHovered)
 		}

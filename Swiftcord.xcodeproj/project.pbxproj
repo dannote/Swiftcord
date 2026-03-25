@@ -1768,7 +1768,7 @@
 		};
 		36429936286801C900483D0A /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftInstitute/DiscordKit";
+			repositoryURL = "https://github.com/dannote/DiscordKit";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -1792,7 +1792,7 @@
 		};
 		DA63C8D029834E4C00B34D60 /* XCRemoteSwiftPackageReference "DiscordKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftInstitute/DiscordKit";
+			repositoryURL = "https://github.com/dannote/DiscordKit";
 			requirement = {
 				branch = main;
 				kind = branch;

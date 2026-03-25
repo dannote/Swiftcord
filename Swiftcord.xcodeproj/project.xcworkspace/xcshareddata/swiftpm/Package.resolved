@@ -1,5 +1,5 @@
 {
-  "originHash" : "276cccd79e6424aec43dc97aeca0900d3f75403e1f85539d06f50c5340e09bf2",
+  "originHash" : "c35eaa3036caa9b0e9dc149df1e46ce4146612fa61eac643431f33395b5ae680",
   "pins" : [
     {
       "identity" : "appcenter-sdk-apple",
@@ -22,10 +22,10 @@
     {
       "identity" : "discordkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftInstitute/DiscordKit",
+      "location" : "https://github.com/dannote/DiscordKit",
       "state" : {
         "branch" : "main",
-        "revision" : "66aa8ca863f232048ef8561f236a5041c259f902"
+        "revision" : "69c89fcd71c5d242eaec406d564751421df5aea2"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
       "state" : {
-        "revision" : "ce592ae52f982c847a4efc0dd881cc9eb32d29f2",
-        "version" : "1.6.4"
+        "revision" : "bbd81b6725ae874c69e9b8c8804d462356b55523",
+        "version" : "1.10.1"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "102a647b573f60f73afdce5613a51d71349fe507",
-        "version" : "1.30.0"
+        "revision" : "a008af1a102ff3dd6cc3764bb69bf63226d0f5f6",
+        "version" : "1.36.1"
       }
     },
     {

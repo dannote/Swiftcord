@@ -12,9 +12,25 @@ import DiscordKitCore
 import CachedAsyncImage
 import Introspect
 import Combine
+import UserNotifications
 
 
 
+
+func showLocalNotification(title: String, body: String) {
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.sound = .default
+
+    let request = UNNotificationRequest(
+        identifier: UUID().uuidString,
+        content: content,
+        trigger: nil
+    )
+
+    UNUserNotificationCenter.current().add(request)
+}
 
 struct NewAttachmentError: Identifiable {
     var id: String { title + message }
@@ -487,6 +503,13 @@ struct MessagesView: View {
                 case .messageCreate(let msg):
                     if msg.channel_id == serverCtx.channel?.id {
                         viewModel.addMessage(msg)
+                    }
+                    if msg.author.id != gateway.cache.user?.id,
+                       !(NSApp.isActive && msg.channel_id == serverCtx.channel?.id) {
+                        showLocalNotification(
+                            title: msg.author.username,
+                            body: msg.content
+                        )
                     }
                     guard msg.webhook_id == nil else { break }
                     // Remove typing status after user sent a message
