@@ -111,20 +111,12 @@ struct ActionMessageView: View {
 			
 			if mini {
 				Text(data.message).font(.body)
-					.rotationEffect(.degrees(180))
-					.scaleEffect(y: -1)
 			} else {
 				HStack(spacing: 0) {
 					Text(data.message).font(.body)
-						.rotationEffect(.degrees(180))
-						.scaleEffect(y: -1)
 					Text(" ").font(.body)
-						.rotationEffect(.degrees(180))
-						.scaleEffect(y: -1)
 					Text(DateFormatter.messageDateFormatter.string(from: message.timestamp))
 						.font(.callout)
-						.rotationEffect(.degrees(180))
-						.scaleEffect(y: -1)
 				}
 			}
 		}

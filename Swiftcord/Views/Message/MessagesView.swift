@@ -113,7 +113,7 @@ struct DayDividerView: View {
             .foregroundColor(.secondary)
             .padding(.vertical, 8)
             .padding(.leading, 16)
-            .scaleEffect(x: -1)
+            .rotationEffect(.degrees(180))
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
@@ -125,6 +125,7 @@ struct UnreadDivider: View {
             .font(.caption)
             .foregroundColor(.red)
             .padding(.vertical, 4)
+            .rotationEffect(.degrees(180))
     }
 }
 
@@ -136,7 +137,7 @@ struct UnreadDayDividerView: View {
             Text(date, style: .date)
                 .font(.caption)
                 .foregroundColor(.secondary)
-                .scaleEffect(x: -1)
+                .rotationEffect(.degrees(180))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
 
@@ -144,7 +145,7 @@ struct UnreadDayDividerView: View {
                 .textCase(.uppercase)
                 .font(.caption)
                 .foregroundColor(.red)
-                .scaleEffect(x: -1)
+                .rotationEffect(.degrees(180))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
 
@@ -267,11 +268,13 @@ struct MessagesView: View {
                     
                     if viewModel.reachedTop {
                         MessagesViewHeader(chl: serverCtx.channel)
+                            .rotationEffect(.degrees(180))
                             .zeroRowInsets()
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 15)
                     } else {
                         loadingSkeleton
+                            .rotationEffect(.degrees(180))
                             .zeroRowInsets()
                             .onAppear { if viewModel.fetchMessagesTask == nil { fetchMoreMessages() } }
                             .onDisappear {
