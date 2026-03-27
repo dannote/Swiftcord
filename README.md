@@ -2,167 +2,76 @@
 
 <h1 align="center">Swiftcord</h1>
 
-<p align="center">
-  <a aria-label="Join the community on Discord" href="https://discord.gg/he7n6MGDXS" target="_blank">
-    <img alt="" src="https://img.shields.io/discord/964741354112577557?style=for-the-badge&labelColor=black&label=Join%20Server&logo=Discord">
-  </a>
-
-  <!-- Self-hosted tokei_rs instance, only works for repos in the SwiftcordApp org -->
-  <img alt="" src="http://vinkwok.mywire.org/tokei/github/SwiftcordApp/Swiftcord?style=for-the-badge&category=code">
-  
-  <a aria-label="Download" href="https://github.com/SwiftcordApp/Swiftcord/releases/latest">
-    <img alt="" src="https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge&labelColor=black&color=eb563c&label=Download">
-  </a>
-</p>
-
 <p align="center">Native Discord client for macOS built in Swift</p>
 
-> [!WARNING]
-> I have fully moved my development time and attention to the next generation of Swiftcord, which means I will not be
-> frequently monitoring this repository and its issues. Read [this discussion](https://github.com/SwiftcordApp/Swiftcord/discussions/189) to find out more!
->
-> We are very near to release, and I can't wait to let everyone experience the future of Swiftcord!
+> [!NOTE]
+> This is an actively maintained fork of [SwiftcordApp/Swiftcord](https://github.com/SwiftcordApp/Swiftcord), incorporating fixes from the community and keeping the client functional with the latest Discord API changes.
 
 [![](https://github.com/SwiftcordApp/.github/blob/main/res/hero.webp?raw=true)](https://github.com/SwiftcordApp/.github/blob/main/res/swiftcord-promo.mov?raw=true)
-###### This image doesn't animate properly in Safari, unfortunately. Click on it to view the original video.
-
-[![Weblate project translated](https://img.shields.io/weblate/progress/swiftcord?style=for-the-badge)](https://hosted.weblate.org/projects/swiftcord/swiftcord/)
 
 ---
 
-Swiftcord is beautiful, follows design principals of the official client while keeping the macOS look and feel that you love, and most importantly, its (really) fast!
+## Changes from upstream
 
-Powered by [DiscordKit](https://github.com/SwiftcordApp/DiscordKit), a Swift Discord implementation built
-from the ground up.
+**Critical fixes:**
+- ✅ Gateway compatibility restored — login no longer hangs (updated client parity, capabilities, and DecodeThrowable handling)
+- ✅ Builds on Xcode 16+ (updated Sentry, Lottie, and other dependencies)
 
-**If you like this project, please smash the star button and be one of my stargazers 🌟! It motivates
-me to continue investing time into Swiftcord.**
+**Features from [SwiftInstitute/Swiftcord](https://github.com/SwiftInstitute/Swiftcord):**
+- Display name support
+- Read/unread state management (manual ack, read on send, mark as unread)
+- Context menus for guilds and channels
+- Message scroll fixes (reversed list, scroll to unread, scroll to reply)
+- 100+ guilds fix for Nitro users
+- Font scaling / text size settings
+- Settings UI redesign
+- Image lightbox
+- Liquid Glass UI for macOS 26 (Tahoe)
+- DMG builder script
 
-## Supporters
-Supporters get feature releases 2 weeks before they are made public! 
+**Additional improvements:**
+- Native macOS notifications for new messages
+- Bot/webhook badge text visibility in light mode
+- Russian localization fixes
+- Compiler type-check fix for StickerPackView
 
-**Be a supporter to support me and this project's future! Perfect if you'd like to contribute but don't 
-have the skills or time required! It's a great way of thanking me for my work. I'll be eternally grateful!**
-
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/cryptoAlgorithm?label=Sponsor%20Me!&logo=buymeacoffee&style=for-the-badge)](https://github.com/sponsors/cryptoAlgorithm)
-[![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dcryptoalgo%26type%3Dpatrons&style=for-the-badge)](https://www.patreon.com/cryptoAlgo)
-
-<!--<table>
-  <tr>
-    <td>
-      <img src="" width=100 height=100/>
-    </td>
-    <td>
-      <strong></strong>
-      <br>
-      <a href=""></a>
-      <br><br>
-      <i></i>
-    </td>
-  </tr>
-</table>-->
-
-<!--### Amazing Supporter 🤯-->
-<!--<table>
-  <tr>
-    <td>
-      <img src="" width=36 height=36/>
-    </td>
-    <td>
-      <code><strong></strong></code> - First amazing supporter!
-    </td>
-  </tr>
-</table>-->
-
-<!--### Extremely Cool Supporter 🧊-->
-
-## Contents
-* [Motivation](#motivation)
-* [Releases](#releases)
-* [FAQ](#faq)
-* [Roadmap](#roadmap)
-* [Copyright Notice](#copyright-notice)
+Powered by [DiscordKit](https://github.com/dannote/DiscordKit) (forked with updated Gateway protocol support).
 
 ---
 
-## Motivation
+## Building from source
 
-Swiftcord was created to offer a Discord-like UI and experience while
-having the performance and memory benefits of native apps. The idea started
-brewing when I was tight on RAM, then noticed Discord using 600+MB of RAM.
-I then realized that was the perfect opportunity to explore SwiftUI,
-since it was relatively new to me at that time. Hence, Swiftcord was born!
+**Requirements:** macOS 12+ and Xcode 16+
 
----
+```bash
+git clone https://github.com/dannote/Swiftcord.git
+cd Swiftcord
+open Swiftcord.xcodeproj
+```
 
-## Releases
-
-You'll need **macOS Monterey and above (>= 12.0)** to run Swiftcord.
-Releases from the channels below are universal bundles, and run natively on
-both Apple Silicon and Intel.
-
-### Nightly Builds (Latest fixes/features, built from the latest commit on `main`, might be unstable)
-[![Download latest nightly build](https://img.shields.io/github/actions/workflow/status/SwiftcordApp/Swiftcord/build.yaml.svg?style=for-the-badge)](https://nightly.link/SwiftcordApp/Swiftcord/workflows/build.yaml/main/swiftcord-canary.zip)
-
-For the latest features and fixes, [a pre-built version of the latest commit is available here](https://nightly.link/SwiftcordApp/Swiftcord/workflows/main/main/Swiftcord_Canary.zip)
-
-### Alpha (More stable, less updated)
-[![Download latest GitHub release](https://img.shields.io/github/v/release/cryptoAlgorithm/Swiftcord?style=for-the-badge)](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
-
-Alpha releases are available at [GitHub Releases](https://github.com/cryptoAlgorithm/Swiftcord/releases/)
-
-### Homebrew
-[![homebrew cask](https://img.shields.io/homebrew/cask/v/swiftcord?style=for-the-badge)](https://formulae.brew.sh/cask/swiftcord)
-
-Swiftcord is also available on homebrew as a cask: `brew install swiftcord`. Versions are
-lock stepped with GitHub releases.
-
-### TestFlight
-
-Coming soon!
-
-<!-- todo: Add building from source -->
+Build and run the `Swiftcord` scheme.
 
 ---
 
 ## FAQ
 
-Covers a few common questions I have encountered, click on the question
-to expand the answer
-
 <details>
-  <summary><b>Will I get banned for using Swiftcord/Is using Swiftcord illegal?</b></summary>
-    Nobody really knows what Discord's official stance on unofficial clients is. 
-    However, hundreds of people and I have been using Swiftcord for quite a while, 
-    and nobody has been banned to date.
-  <i>
-    I do not take any responsibility for account bans due to the use of Swiftcord,
-    whether direct or indirect, although there's a very low possibility of that occurring. 
-    I recommend trying Swiftcord with an alt if possible.
-  </i>
-</details>
-<details>
-  <summary><b>Feature <i>x</i> is missing! When will <i>y</i> be implemented?</b></summary>
-  Swiftcord currently is in the alpha stage, and hasn't achieved feature
-  parity with the official Discord client yet (it's quite far behind). 
-  Many features are planned, but I do not currently have a timeline for them. 
-  Development is progressing at a fast pace, but sometimes bugs may take an unexpectedly long time to fix.
-  I appreciate contributions, bug reports, and suggestions :)
-</details>
-<details>
-  <summary><b>Swiftcord just crashed!</b></summary>
-  Although I'm aiming for 0 crashes (which is made easier by Swift),
-  sometimes the unexpected happens xD. If you experience a crash, please
-  open an issue with appropriate information like the line the error
-  occurs on, relevant logs, and what you were doing that might have caused
-  the crash. If you can solve the bug causing the crash, that's even better!
+  <summary><b>Will I get banned for using Swiftcord?</b></summary>
+  Nobody really knows Discord's official stance on unofficial clients.
+  Hundreds of people have been using Swiftcord for a while with no reported bans.
+  The client identifies as the official Discord desktop client.
+  <br><br>
+  <i>Use at your own risk, preferably with an alt account first.</i>
 </details>
 
----
+<details>
+  <summary><b>The app won't open / macOS says it's damaged</b></summary>
+  If you build from source, the app is ad-hoc signed. On some macOS versions you may need to:
 
-## Roadmap
-Take a look at Swiftcord's [GitHub Projects board](https://github.com/orgs/SwiftcordApp/projects/1)
-to get a rough idea of what's brewing!
+  ```bash
+  xattr -cr /path/to/Swiftcord.app
+  ```
+</details>
 
 ---
 
@@ -180,8 +89,4 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-The above copyright notice, this permission notice, and its license shall be included in all copies or substantial portions of the Software.
-
 You can find a copy of the GNU General Public License v3 in LICENSE or https://www.gnu.org/licenses/.
-
-I ❤️ Open Source
